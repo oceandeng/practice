@@ -4,11 +4,20 @@ var path = require('path');
 
 var port = process.env.PORT || 3000;
 
+// NODE_ENV = production;
+
+if('development' == app.get('env')){
+	app.set('staticPath', '/static');	//开发环境
+} else {
+	app.set('staticPath', '/build');	//生产环境
+}
+
 // 将静态文件放在static目录下
-app.use(express.static(path.join(__dirname, '/static')));
+// app.use(express.static(path.join(__dirname, '/static')));
+app.use(express.static(__dirname + app.get('staticPath')));
 
 app.use(function(req, res){
-	res.sendFile(path.join(__dirname, '/static/index.html'));
+	res.sendFile(path.join(__dirname, '/index.html'));
 });
 
 var server = app.listen(port, function(){
