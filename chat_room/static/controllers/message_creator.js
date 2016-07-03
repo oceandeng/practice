@@ -1,11 +1,10 @@
 // MessageCreatorCtrl
-chatRoomApp.controller('MessageCreatorCtrl', function($scope, socket){
-	$scope.newMessage = '';
+chatRoomApp.controller('MessageCreatorCtrl', ["$scope", "socket", function($scope, socket){
 	$scope.createMessage = function(){
-		if($scope.newMessage == ''){
-			return
-		};
-		socket.emit('createMessage', $scope.newMessage);
+		socket.emit('messages.create', {
+			message: $scope.newMessage,
+			creator: $scope.me
+		});
 		$scope.newMessage = '';
 	}
-});
+}]);

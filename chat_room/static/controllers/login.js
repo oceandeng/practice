@@ -1,5 +1,5 @@
 // LoginCtrl
-chatRoomApp.controller('LoginCtrl', function($scope, $http, $location){
+chatRoomApp.controller('LoginCtrl', ["$scope", "$http", "$location", function($scope, $http, $location){
 	$scope.login = function(){
 		$http({
 			url: '/api/login',
@@ -14,4 +14,4 @@ chatRoomApp.controller('LoginCtrl', function($scope, $http, $location){
 			$location.path('/login');
 		})
 	}
-})
+}])
